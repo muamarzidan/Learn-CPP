@@ -2,6 +2,7 @@
 
 using namespace std;
 
+
 int main() {
     int bilangan, asli, jumlah;
 
@@ -22,6 +23,7 @@ int main() {
     return 0;
 }
 
+
 //int main() {
 //    int a, b, bilangan;
 //    cout << "Masukkan batas bawah : ";
@@ -34,6 +36,7 @@ int main() {
 //    return 0;
 //}
 
+
 //int main() {
 //    int nilai;
 //    cin >> nilai;
@@ -45,6 +48,7 @@ int main() {
 //    return 0;
 //}
 
+
 //int main() {
 //    int bil1 = 2, bil2 = 3, hasil;
 //    hasil = bil1 <= bil2 && bil1 < bil2;
@@ -55,6 +59,7 @@ int main() {
 //    cout << hasil << endl;
 //    return 0;
 //}
+
 
 //int main() {
 //    int bil1 = 2, bil2 = 3, hasil;
@@ -72,6 +77,7 @@ int main() {
 //    cout << hasil << endl;
 //    return 0;
 //}
+
 
 //int main() {
 //    int bil1 = 3, bil2 = 4, hasil1;
