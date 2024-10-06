@@ -1,0 +1,167 @@
+#ifndef LIST_H
+#define LIST_H
+
+#include <iostream>
+
+#define first(L) (L).first
+#define next(P) (P)->next
+#define info(P) (P)->info
+
+using namespace std;
+
+typedef int infotype;
+typedef struct elmlist *address;
+
+struct elmlist {
+    infotype info;
+    address next;
+};
+
+struct list {
+    address first;
+};
+
+address allocate(infotype x);
+void createList(list &L);
+void insertFirst(list &L, address p);
+void insertLast(list &L, address p);
+void insertAfter(list &L, address p, address prec);
+void deleteLast(list &L);
+void deleteAfter(list &L, address prec);
+void printInfo(list L);
+address searchInfo(list L, infotype x);
+
+#endif
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+#include "list.h"
+
+using namespace std;
+
+void createList(list &L) {
+    first(L) = NULL;
+}
+
+address allocate(infotype x) {
+    address p = new elmlist;
+    info(p) = x;
+    next(p) = NULL;
+    return p;
+}
+
+void insertFirst(list &L, address p) {
+    next(p) = first(L);
+    first(L) = p;
+}
+
+void insertLast(list &L, address p) {
+    if (first(L) == NULL) {
+        first(L) = p;
+    } else {
+        address last = first(L);
+        while (next(last) != NULL) {
+            last = next(last);
+        }
+        next(last) = p;
+    }
+}
+
+void insertAfter(list &L, address p, address prec) {
+    if (prec != NULL) {
+        next(p) = next(prec);
+        next(prec) = p;
+    }
+}
+
+void deleteLast(list &L) {
+    if (first(L) != NULL) {
+        if (next(first(L)) == NULL) {
+            first(L) = NULL;
+        } else {
+            address prev = NULL;
+            address last = first(L);
+            while (next(last) != NULL) {
+                prev = last;
+                last = next(last);
+            }
+            next(prev) = NULL;
+            delete last;
+        }
+    }
+}
+
+void deleteAfter(list &L, address prec) {
+    if (prec != NULL) {
+        address p = next(prec);
+        if (p != NULL) {
+            next(prec) = next(p);
+            delete p;
+        }
+    }
+}
+
+address searchInfo(list L, infotype x) {
+    address p = first(L);
+    while (p != NULL) {
+        if (info(p) == x) {
+            return p;
+        }
+        p = next(p);
+    }
+    return NULL;
+}
+
+void printInfo(list L) {
+    address p = first(L);
+    while (p != NULL) {
+        cout << info(p) << ", ";
+        p = next(p);
+    }
+    cout << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+#include "list.h"
+
+using namespace std;
+
+int main() {
+    list L;
+    createList(L);
+
+    infotype nim[10] = {1, 0, 3, 0, 1, 2, 3, 0, 0, 3};
+    cout << "Masukkan NIM perdigit" << endl;
+    for (int i = 0; i < 10; i++) {
+        cout << "Digit " << i+1 << " : " << nim[i] << endl;
+        address p = allocate(nim[i]);
+        insertLast(L, p);
+    }
+
+    cout << "Isi List: ";
+    printInfo(L);
+
+    return 0;
+}
